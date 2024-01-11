@@ -67,7 +67,9 @@ export default class DockerContainer {
   }
 
   #baseImage(runtime) {
-    return `lambci/lambda:${runtime}`
+    const runtimeName = runtime.split(/\d+/g)?.[0] ?? '';
+    const runtimeVersion = runtime.match(/\d+/g);
+    return `public.ecr.aws/shogo82148/lambda-${runtimeName}:${runtimeVersion}`
   }
 
   async start(codeDir) {
