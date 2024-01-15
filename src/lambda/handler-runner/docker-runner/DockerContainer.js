@@ -67,9 +67,8 @@ export default class DockerContainer {
   }
 
   #baseImage(runtime) {
-    const runtimeName = runtime.split(/\d+/g)?.[0] ?? '';
-    const runtimeVersion = runtime.match(/\d+/g);
-    return `public.ecr.aws/shogo82148/lambda-${runtimeName}:${runtimeVersion}`
+    // @ToDo add runtime 20
+    return `mlupin/docker-lambda:${runtime}`.replace('nodejs20.x', 'nodejs18.x')
   }
 
   async start(codeDir) {
