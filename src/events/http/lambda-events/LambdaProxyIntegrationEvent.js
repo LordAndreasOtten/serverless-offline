@@ -108,6 +108,9 @@ export default class LambdaProxyIntegrationEvent {
       body = null
     }
 
+    const xApiKey = headers?.["x-api-key"] || env.SLS_API_KEY || "offlineContext_apiKey"
+    const xOfflineApiKeyId = headers?.["x-offline-api-key-id"] || env.SLS_API_KEY_ID || "offlineContext_apiKeyId"
+
     // clone own props
     const pathParams = { ...this.#request.params }
 
@@ -186,8 +189,8 @@ export default class LambdaProxyIntegrationEvent {
         identity: {
           accessKey: null,
           accountId: env.SLS_ACCOUNT_ID || "offlineContext_accountId",
-          apiKey: env.SLS_API_KEY || "offlineContext_apiKey",
-          apiKeyId: env.SLS_API_KEY_ID || "offlineContext_apiKeyId",
+          apiKey: xApiKey,
+          apiKeyId: xOfflineApiKeyId,
           caller: env.SLS_CALLER || "offlineContext_caller",
           cognitoAuthenticationProvider:
             _headers["cognito-authentication-provider"] ||

@@ -145,6 +145,10 @@ Defines service path which is used by SLS running inside Docker container.
 
 The network that the Docker container will connect to.
 
+#### dockerDns
+
+The dns for the dockerNetwork that the Docker container will connect to.
+
 #### dockerReadOnly
 
 Marks if the docker code layer should be read only.<br />
@@ -580,6 +584,9 @@ You are able to use environment variables to customize identity params in event 
 | SLS_COGNITO_AUTHENTICATION_PROVIDER | event.requestContext.identity.cognitoAuthenticationProvider |
 
 You can use [serverless-dotenv-plugin](https://github.com/colynb/serverless-dotenv-plugin) to load environment variables from your `.env` file.
+SLS_API_KEY and SLS_API_KEY_ID will also take values from headers to do so set:
+- x-api-key
+- x-offline-api-key-id
 
 ## AWS API Gateway Features
 
