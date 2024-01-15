@@ -42,6 +42,7 @@ export default class HandlerRunner {
         hostServicePath: this.#options.dockerHostServicePath,
         layersDir: this.#options.layersDir,
         network: this.#options.dockerNetwork,
+        dns: this.#options.dockerDns,
         readOnly: this.#options.dockerReadOnly,
       }
 

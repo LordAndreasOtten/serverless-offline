@@ -169,6 +169,10 @@ export default class DockerContainer {
       dockerArgs.push("--network", this.#dockerOptions.network)
     }
 
+    if (this.#dockerOptions.dns) {
+      dockerArgs.push("--dns", this.#dockerOptions.dns)
+    }
+
     const { stdout: containerId } = await execa("docker", [
       "create",
       ...dockerArgs,
