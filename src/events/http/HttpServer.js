@@ -463,10 +463,11 @@ export default class HttpServer {
             .header("x-amzn-ErrorType", "ForbiddenException")
             .type("application/json")
 
-        const apiKey = request.headers["x-api-key"]
+        const apiKey = request.headers["x-api-key"];
+        const offlineApiKeyId = request.headers["x-offline-api-key-id"];
 
         if (apiKey) {
-          if (!this.#apiKeysValues.has(apiKey)) {
+          if (!offlineApiKeyId && !this.#apiKeysValues.has(apiKey)) {
             log.debug(
               `Method '${method}' of function '${functionKey}' token '${apiKey}' not valid.`,
             )
