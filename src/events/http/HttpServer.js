@@ -5,6 +5,10 @@ import { join, resolve } from "node:path"
 import { exit } from "node:process"
 import h2o2 from "@hapi/h2o2"
 import { Server } from "@hapi/hapi"
+import {
+    APIGatewayClient,
+    GetApiKeysCommand,
+} from "@aws-sdk/client-api-gateway"
 import { log } from "../../utils/log.js"
 import authFunctionNameExtractor from "../authFunctionNameExtractor.js"
 import authJWTSettingsExtractor from "./authJWTSettingsExtractor.js"
@@ -480,18 +484,22 @@ export default class HttpServer {
             .header("x-amzn-ErrorType", "ForbiddenException")
             .type("application/json")
 
-        const apiKey = request.headers["x-api-key"];
+        const apiKey = request.headers["x-api-key"]
 
-        let offlineApiKeyId = undefined;
-        if(apiKey && process.env.LOCAL_AWS_ENDPOINT){
+        let offlineApiKeyId
+        if (apiKey && process.env.LOCAL_AWS_ENDPOINT) {
           const client = new APIGatewayClient({
-            region: process.env.AWS_REGION,
+            region: process.env.AWS_REGION ?? process.env.REGION,
             endpoint: process.env.LOCAL_AWS_ENDPOINT,
-          });
-          const response = await client.send(new GetApiKeysCommand({includeValues: true}));
-          const item = response.items.find(i => i.value === request.headers?.["x-api-key"]);
+          })
+          const response = await client.send(
+            new GetApiKeysCommand({ includeValues: true }),
+          )
+          const item = response.items.find(
+            (i) => i.value === request.headers?.["x-api-key"],
+          )
 
-          offlineApiKeyId = item?.id;
+          offlineApiKeyId = item?.id
           request.raw.req.rawHeaders.push("x-offline-api-key-id", item?.id)
         }
 
