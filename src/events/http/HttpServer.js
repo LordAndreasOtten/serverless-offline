@@ -481,7 +481,19 @@ export default class HttpServer {
             .type("application/json")
 
         const apiKey = request.headers["x-api-key"];
-        const offlineApiKeyId = request.headers["x-offline-api-key-id"];
+
+        let offlineApiKeyId = undefined;
+        if(apiKey && process.env.LOCAL_AWS_ENDPOINT){
+          const client = new APIGatewayClient({
+            region: process.env.AWS_REGION,
+            endpoint: process.env.LOCAL_AWS_ENDPOINT,
+          });
+          const response = await client.send(new GetApiKeysCommand({includeValues: true}));
+          const item = response.items.find(i => i.value === request.headers?.["x-api-key"]);
+
+          offlineApiKeyId = item?.id;
+          request.raw.req.rawHeaders.push("x-offline-api-key-id", item?.id)
+        }
 
         if (apiKey) {
           if (!offlineApiKeyId && !this.#apiKeysValues.has(apiKey)) {
