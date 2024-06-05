@@ -472,7 +472,7 @@ export default class HttpServer {
         let offlineApiKeyId
         if (apiKey && process.env.LOCAL_AWS_ENDPOINT) {
           const client = new APIGatewayClient({
-            region: process.env.AWS_REGION,
+            region: process.env.AWS_REGION ?? process.env.REGION,
             endpoint: process.env.LOCAL_AWS_ENDPOINT,
           })
           const response = await client.send(
