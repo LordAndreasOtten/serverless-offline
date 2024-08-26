@@ -66,14 +66,42 @@ export default class DockerContainer {
     this.#servicePath = servicePath
   }
 
-  #baseImage(runtime, architecture) {
+  async #checkRegistry(imageNameTag) {
+    let found = false
+    try {
+      const res = await execa("docker", ["manifest", "inspect", imageNameTag])
+      found = !res.failed
+    } catch {
+      // not empty
+    }
+
+    return found
+  }
+
+  #baseImage(runtime, architecture, useFallback = false) {
     const runtimeImageTag = new Runtime().getImageNameTag(runtime, architecture)
+    const baseImage = `andreascubiceyes/lambda-${runtimeImageTag}`
     // # Gets the ECR image format like `python:3.7` or `nodejs:16-x86_64`
+    if (!useFallback) {
+      return baseImage
+    }
     return `public.ecr.aws/lambda/${runtimeImageTag}`
   }
 
-  async start(codeDir) {
+  async #pullImage() {
+    if (!(await this.#checkRegistry(this.#imageNameTag))) {
+      this.#imageNameTag = this.#baseImage(
+        this.#runtime,
+        this.#architecture,
+        true,
+      )
+      this.#image = new DockerImage(this.#imageNameTag)
+    }
     await this.#image.pull()
+  }
+
+  async start(codeDir) {
+    await this.#pullImage()
     log.debug("Run Docker container...")
 
     let permissions = "ro"
