@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [14.4.0](https://github.com/dherault/serverless-offline/compare/v14.3.4...v14.4.0) (2024-12-09)
+
+### Features
+
+- add support for nodejs22.x runtime ([#1837](https://github.com/dherault/serverless-offline/issues/1837)) ([1b21934](https://github.com/dherault/serverless-offline/commit/1b2193459609e128522568c67fc83ccddfd8d146))
+
+### Bug Fixes
+
+- update jsonpath-plus to close vulnerability ([#1835](https://github.com/dherault/serverless-offline/issues/1835)) ([903340a](https://github.com/dherault/serverless-offline/commit/903340a9443dfd6c3013d16b053b96c3e796ecf7))
+
+## [14.3.4](https://github.com/dherault/serverless-offline/compare/v14.3.3...v14.3.4) (2024-11-06)
+
+### Maintenance Updates
+
+- Removed sponsor logging
+
+## [14.3.3](https://github.com/dherault/serverless-offline/compare/v14.3.2...v14.3.3) (2024-10-17)
+
+### Bug Fixes
+
+- **deps:** vulnerability in jsonpath-plus ([#1827](https://github.com/dherault/serverless-offline/issues/1827)) ([25b20ac](https://github.com/dherault/serverless-offline/commit/25b20ac7aca7cbcea703e0ba54b030ee1a455d3b))
+
+## [14.3.2](https://github.com/dherault/serverless-offline/compare/v14.3.1...v14.3.2) (2024-08-30)
+
+### Maintenance Updates
+
+- Updated the `v14` release to use the latest `npm` tag for better alignment with current package.
+
+## [14.3.1](https://github.com/dherault/serverless-offline/compare/v14.3.0...v14.3.1) (2024-08-30)
+
+### Bug Fixes
+
+- Revert return 500 Internal Server Error on python error ([#1796](https://github.com/dherault/serverless-offline/pull/1796))
+
+## [14.3.0](https://github.com/dherault/serverless-offline/compare/v14.3.0...v14.2.1) (2024-08-30)
+
+### Features
+
+- Add preLoadModules option to import modules on main thread ([#1777](https://github.com/dherault/serverless-offline/pull/1777))
+
+### Bug Fixes
+
+- handle result structure without body ([#1814](https://github.com/dherault/serverless-offline/pull/1814))
+- return 500 Internal Server Error on python error ([#1796](https://github.com/dherault/serverless-offline/pull/1796))
+
+## [14.2.0](https://github.com/dherault/serverless-offline/compare/v14.1.1...v14.2.0) (2024-08-22)
+
+### Features
+
+- Add sponsoring message at plugin start ([#1811](https://github.com/dherault/serverless-offline/pull/1811))
+
 ## [14.1.1](https://github.com/dherault/serverless-offline/compare/v14.1.0...v14.1.1) (2024-08-17)
 
 ### Bug Fixes

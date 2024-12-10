@@ -1,9 +1,35 @@
 # Serverless Offline
 
-⚠️
-We are looking for maintainers! This package is entirely community-driven. Please send an email to dherault to start helping now.
-⚠️
-
+<div align="center">
+  <p>
+    <sup>
+      <a href="https://github.com/sponsors/dherault">Serverless-offline is supported by the community.</a>
+    </sup>
+  </p>
+  <sup>
+    Special thanks to:
+  </sup>
+  <a href="https://airfriend.app?ref=so">
+    <div>
+      <img src="https://airfriend.app/images/logotype.png" height="64" alt="Airfriend">
+    </div>
+    <b>
+      An AI friend on WhatsApp.
+    </b>
+  </a>
+  <a href="https://arccode.dev?ref=so">
+    <div>
+      <img src="https://arccode.dev/images/logotype.png" height="64" alt="Arccode">
+    </div>
+    <b>
+      The first role-playing game for developers
+    </b>
+    <div>
+      XP, level ups and guilds. All while you work.
+    </div>
+  </a>
+</div>
+&nbsp;
 <p>
   <a href="https://www.serverless.com">
     <img src="http://public.serverless.com/badges/v3.svg">
@@ -203,6 +229,10 @@ Turns off all authorizers.
 
 Don't prepend http routes with the stage.
 
+#### noSponsor
+
+Remove sponsor message from the output.
+
 #### noTimeout
 
 -t Disables the timeout feature.
@@ -246,6 +276,11 @@ Default: 600 (10 minutes)
 
 WebSocket port to listen on.<br />
 Default: 3001
+
+#### preLoadModules
+
+Pre-load specified modules in the main thread to avoid crashes when importing in worker threads. Provide module names as a comma-separated list (e.g., "sharp,canvas").<br />
+Default: ''
 
 Any of the CLI options can be added to your `serverless.yml`. For example:
 
